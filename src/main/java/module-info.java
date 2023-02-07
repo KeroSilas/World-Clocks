@@ -1,6 +1,7 @@
 module com.kerosilas.analogclock {
     requires javafx.controls;
     requires javafx.fxml;
+    requires MaterialFX;
 
 
     opens com.kerosilas.analogclock to javafx.fxml;

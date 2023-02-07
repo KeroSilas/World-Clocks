@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.kerosilas.analogclock.controller.AnalogClockController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="402.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerosilas.analogclock.controller.AnalogClockController">
+   <top>
+      <HBox fx:id="hBox" BorderPane.alignment="CENTER">
+         <children>
+            <MFXFilterComboBox fx:id="comboBox" floatMode="DISABLED" prefWidth="250.0" promptText="Choose a city" searchText="" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="8.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+            </MFXFilterComboBox>
+            <MFXButton fx:id="addButton" buttonType="RAISED" depthLevel="LEVEL1" disable="true" onAction="#handleAdd" prefHeight="31.0" prefWidth="75.0" text="Add">
+               <HBox.margin>
+                  <Insets right="8.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+            </MFXButton>
+            <MFXButton fx:id="removeButton" buttonType="RAISED" depthLevel="LEVEL1" disable="true" onAction="#handleRemove" prefHeight="31.0" prefWidth="75.0" text="Remove">
+               <font>
+                  <Font name="Roboto Medium" size="12.0" />
+               </font>
+            </MFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <center>
+      <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+         <content>
+            <FlowPane fx:id="flowPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+         </content>
+      </MFXScrollPane>
+   </center>
+</BorderPane>
