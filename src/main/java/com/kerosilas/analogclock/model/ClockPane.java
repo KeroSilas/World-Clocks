@@ -33,7 +33,7 @@ public class ClockPane {
         vBox = new VBox();
         vBox.setPrefSize(390,390);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(6);
+        vBox.setSpacing(8);
 
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
@@ -56,7 +56,7 @@ public class ClockPane {
         int minute = time.getMinute();
         int second = time.getSecond();
 
-        hourRotate.setAngle(hour * (360F / 12F) + minute * 0.5);
+        hourRotate.setAngle(hour * (360F / 12F) + (minute / 60F) * (360F / 12F));
         minuteRotate.setAngle(minute * (360F / 60F));
         secondRotate.setAngle(second * (360F / 60F));
     }
