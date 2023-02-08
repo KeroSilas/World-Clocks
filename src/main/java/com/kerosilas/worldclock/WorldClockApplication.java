@@ -1,4 +1,4 @@
-package com.kerosilas.analogclock;
+package com.kerosilas.worldclock;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AnalogClockApplication extends Application {
+public class WorldClockApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AnalogClockApplication.class.getResource("AnalogClock.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WorldClockApplication.class.getResource("WorldClock.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Analog Clock");
-        stage.getIcons().add(new Image("file:src/main/resources/com/kerosilas/analogclock/clock.png"));
+        stage.setTitle("World Clocks");
+        stage.getIcons().add(new Image("file:src/main/resources/com/kerosilas/worldclock/clock.png"));
         stage.setMinWidth(422);
         stage.setMinHeight(530);
         stage.setWidth(812);

@@ -1,6 +1,6 @@
-package com.kerosilas.analogclock.controller;
+package com.kerosilas.worldclock.controller;
 
-import com.kerosilas.analogclock.model.ClockPane;
+import com.kerosilas.worldclock.model.ClockPane;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
-public class AnalogClockController {
+public class WorldClockController {
 
     private final ObservableList<String> tzList = FXCollections.observableArrayList();
 

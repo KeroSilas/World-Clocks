@@ -1,11 +1,11 @@
-module com.kerosilas.analogclock {
+module com.kerosilas.worldclock {
     requires javafx.controls;
     requires javafx.fxml;
     requires MaterialFX;
 
 
-    opens com.kerosilas.analogclock to javafx.fxml;
-    exports com.kerosilas.analogclock;
-    exports com.kerosilas.analogclock.controller;
-    opens com.kerosilas.analogclock.controller to javafx.fxml;
+    opens com.kerosilas.worldclock to javafx.fxml;
+    exports com.kerosilas.worldclock;
+    exports com.kerosilas.worldclock.controller;
+    opens com.kerosilas.worldclock.controller to javafx.fxml;
 }

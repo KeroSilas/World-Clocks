@@ -1,4 +1,4 @@
-package com.kerosilas.analogclock.model;
+package com.kerosilas.worldclock.model;
 
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Pos;
@@ -21,6 +21,7 @@ public class ClockPane {
     private final VBox vBox;
     private final Pane pane;
     private final Label timeLabel;
+    private final Label pmamLabel;
     private final Rotate hourRotate;
     private final Rotate minuteRotate;
     private final Rotate secondRotate;
@@ -38,6 +39,11 @@ public class ClockPane {
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         secondRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
+
+        pmamLabel = new Label();
+        pmamLabel.setFont(Font.font("Roboto", FontWeight.BOLD, FontPosture.REGULAR, 14));
+        pmamLabel.setLayoutX(CIRCLE_RADIUS-11);
+        pmamLabel.setLayoutY(CIRCLE_RADIUS-80);
 
         MFXCheckbox checkBox = new MFXCheckbox();
         checkBox.setTranslateX(8);
@@ -72,6 +78,7 @@ public class ClockPane {
         int second = time.getSecond();
 
         timeLabel.setText(time.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase());
+        pmamLabel.setText(time.format(DateTimeFormatter.ofPattern("a")).toUpperCase());
 
         hourRotate.setAngle(hour * (360F / 12F) + (minute / 60F) * (360F / 12F));
         minuteRotate.setAngle(minute * (360F / 60F));
@@ -140,7 +147,7 @@ public class ClockPane {
         pin.setLayoutX(CIRCLE_RADIUS);
         pin.setLayoutY(CIRCLE_RADIUS);
 
-        pane.getChildren().addAll(createHourHand(), createMinuteHand(), pin, createSecondHand());
+        pane.getChildren().addAll(pmamLabel, createHourHand(), createMinuteHand(), pin, createSecondHand());
 
         return pane;
     }
