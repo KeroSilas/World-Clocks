@@ -7,6 +7,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Rotate;
 
 import java.time.LocalTime;
@@ -17,7 +20,7 @@ public class ClockPane {
 
     private final VBox vBox;
     private final Pane pane;
-    private final Label pmamLabel;
+    private final Label timeLabel;
     private final Rotate hourRotate;
     private final Rotate minuteRotate;
     private final Rotate secondRotate;
@@ -32,27 +35,28 @@ public class ClockPane {
         pane = new Pane();
         pane.setMaxSize(CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
 
-        vBox = new VBox();
-        vBox.setPrefSize(390,390);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(16);
-
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         secondRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
 
         MFXCheckbox checkBox = new MFXCheckbox();
-        pmamLabel = new Label();
-
         checkBox.setTranslateX(8);
-        pmamLabel.setTranslateX(274);
+
+        timeLabel = new Label();
+        timeLabel.setFont(Font.font("Roboto", FontWeight.NORMAL, FontPosture.REGULAR, 14));
+        timeLabel.setTranslateX(270);
 
         HBox hBox = new HBox();
-        hBox.getChildren().addAll(checkBox, pmamLabel);
+        hBox.getChildren().addAll(checkBox, timeLabel);
 
         Label tzLabel = new Label();
+        tzLabel.setFont(Font.font("Roboto", FontWeight.NORMAL, FontPosture.REGULAR, 14));
         tzLabel.setText(tz.getID());
 
+        vBox = new VBox();
+        vBox.setPrefSize(390,390);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(16);
         vBox.getChildren().addAll(hBox, createClockFace(), tzLabel);
     }
 
@@ -67,7 +71,7 @@ public class ClockPane {
         int minute = time.getMinute();
         int second = time.getSecond();
 
-        pmamLabel.setText(time.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase());
+        timeLabel.setText(time.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase());
 
         hourRotate.setAngle(hour * (360F / 12F) + (minute / 60F) * (360F / 12F));
         minuteRotate.setAngle(minute * (360F / 60F));

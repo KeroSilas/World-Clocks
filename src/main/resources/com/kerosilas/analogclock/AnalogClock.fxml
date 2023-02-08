@@ -48,7 +48,7 @@
       </HBox>
    </top>
    <center>
-      <MFXScrollPane fitToWidth="true" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #ececec;" BorderPane.alignment="CENTER">
+      <MFXScrollPane fitToWidth="true" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="0.0" style="-fx-border-color: #e3e3e3;" BorderPane.alignment="CENTER">
          <content>
             <FlowPane fx:id="flowPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@styles.css" />
          </content>
@@ -62,12 +62,12 @@
          <children>
             <Label prefHeight="31.0" text="Time in current timezone: ">
                <font>
-                  <Font name="Roboto" size="13.0" />
+                  <Font name="Roboto" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="currentTime" prefHeight="31.0" text="00:00">
+            <Label fx:id="currentTime" prefHeight="31.0" text="N/A">
                <font>
-                  <Font name="Roboto" size="13.0" />
+                  <Font name="Roboto" size="14.0" />
                </font>
             </Label>
          </children>

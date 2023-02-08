@@ -26,20 +26,12 @@ public class AnalogClockController {
 
     private final ObservableList<String> tzList = FXCollections.observableArrayList();
 
-    @FXML
-    private MFXButton addButton;
+    @FXML private MFXButton addButton;
+    @FXML private MFXFilterComboBox<String> comboBox;
+    @FXML private FlowPane flowPane;
+    @FXML private Label currentTime;
 
-    @FXML
-    private MFXFilterComboBox<String> comboBox;
-
-    @FXML
-    private FlowPane flowPane;
-
-    @FXML
-    private Label currentTime;
-
-    @FXML
-    void handleAdd() {
+    @FXML void handleAdd() {
         ClockPane clockPane = new ClockPane(TimeZone.getTimeZone(comboBox.getSelectedItem()));
         flowPane.getChildren().add(clockPane.getVBox());
 
@@ -51,8 +43,7 @@ public class AnalogClockController {
         timeline.play();
     }
 
-    @FXML
-    void handleRemove() {
+    @FXML void handleRemove() {
         List<VBox> toDelete = new ArrayList<>();
         for (int i = 0; i < flowPane.getChildren().size(); i++) {
             VBox vBox = (VBox) flowPane.getChildren().get(i);
