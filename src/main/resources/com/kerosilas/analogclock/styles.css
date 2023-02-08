@@ -1,0 +1,9 @@
+VBox {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #ececec;
+    -fx-padding: 6px;
+    -fx-border-insets: 6px;
+    -fx-background-insets: 6px;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}

@@ -3,6 +3,7 @@ package com.kerosilas.analogclock;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,10 +14,11 @@ public class AnalogClockApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(AnalogClockApplication.class.getResource("AnalogClock.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Analog Clock");
-        stage.setMinWidth(420);
-        stage.setMinHeight(480);
-        stage.setWidth(810);
-        stage.setHeight(870);
+        stage.getIcons().add(new Image("file:src/main/resources/com/kerosilas/analogclock/clock.png"));
+        stage.setMinWidth(422);
+        stage.setMinHeight(530);
+        stage.setWidth(812);
+        stage.setHeight(920);
         stage.setScene(scene);
         stage.show();
     }

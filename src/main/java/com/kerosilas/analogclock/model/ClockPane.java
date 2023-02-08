@@ -1,5 +1,6 @@
 package com.kerosilas.analogclock.model;
 
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -10,12 +11,14 @@ import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 public class ClockPane {
 
     private final VBox vBox;
     private final Pane pane;
+    private final Label pmamLabel;
     private final Rotate hourRotate;
     private final Rotate minuteRotate;
     private final Rotate secondRotate;
@@ -35,14 +38,19 @@ public class ClockPane {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(8);
 
+
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         secondRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
 
-        Label label = new Label();
-        label.setText(tz.getID());
+        MFXCheckbox checkBox = new MFXCheckbox();
 
-        vBox.getChildren().addAll(createClockFace(), label);
+        pmamLabel = new Label();
+
+        Label tzLabel = new Label();
+        tzLabel.setText(tz.getID());
+
+        vBox.getChildren().addAll(checkBox, pmamLabel, createClockFace(), tzLabel);
     }
 
     public VBox getVBox() {
@@ -55,6 +63,8 @@ public class ClockPane {
         int hour = time.getHour() % 12;
         int minute = time.getMinute();
         int second = time.getSecond();
+
+        pmamLabel.setText(time.format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase());
 
         hourRotate.setAngle(hour * (360F / 12F) + (minute / 60F) * (360F / 12F));
         minuteRotate.setAngle(minute * (360F / 60F));
