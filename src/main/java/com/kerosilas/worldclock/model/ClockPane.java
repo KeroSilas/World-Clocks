@@ -43,7 +43,7 @@ public class ClockPane {
         pmamLabel = new Label();
         pmamLabel.setFont(Font.font("Roboto", FontWeight.BOLD, FontPosture.REGULAR, 14));
         pmamLabel.setLayoutX(CIRCLE_RADIUS-11);
-        pmamLabel.setLayoutY(CIRCLE_RADIUS-80);
+        pmamLabel.setLayoutY(CIRCLE_RADIUS+82);
 
         MFXCheckbox checkBox = new MFXCheckbox();
         checkBox.setTranslateX(8);
@@ -86,7 +86,7 @@ public class ClockPane {
     }
 
     private Line createHourHand() {
-        Line hand = new Line(CIRCLE_RADIUS,60,CIRCLE_RADIUS,CIRCLE_RADIUS);
+        Line hand = new Line(CIRCLE_RADIUS,68,CIRCLE_RADIUS,CIRCLE_RADIUS+11);
         hand.setStroke(Color.BLACK);
         hand.setStrokeWidth(10);
         hand.getTransforms().add(hourRotate);
@@ -94,15 +94,15 @@ public class ClockPane {
     }
 
     private Line createMinuteHand() {
-        Line hand = new Line(CIRCLE_RADIUS,15,CIRCLE_RADIUS,CIRCLE_RADIUS);
+        Line hand = new Line(CIRCLE_RADIUS,16,CIRCLE_RADIUS,CIRCLE_RADIUS+13);
         hand.setStroke(Color.BLACK);
-        hand.setStrokeWidth(5);
+        hand.setStrokeWidth(6);
         hand.getTransforms().add(minuteRotate);
         return hand;
     }
 
     private Line createSecondHand() {
-        Line hand = new Line(CIRCLE_RADIUS,10,CIRCLE_RADIUS,CIRCLE_RADIUS);
+        Line hand = new Line(CIRCLE_RADIUS,12,CIRCLE_RADIUS,CIRCLE_RADIUS+15);
         hand.setStroke(Color.RED);
         hand.setStrokeWidth(2);
         hand.getTransforms().add(secondRotate);
@@ -111,7 +111,7 @@ public class ClockPane {
 
     private Pane createClockFace() {
         Circle circle = new Circle(CIRCLE_RADIUS);
-        circle.setStrokeWidth(5);
+        circle.setStrokeWidth(4);
         circle.setStroke(Color.BLACK);
         circle.setFill(Color.WHITE);
         circle.setLayoutX(CIRCLE_RADIUS);
@@ -119,9 +119,9 @@ public class ClockPane {
         pane.getChildren().add(circle);
 
         for (int i = 0; i < 12; i++) {
-            Line hourTick = new Line(10,CIRCLE_RADIUS,35,CIRCLE_RADIUS);
+            Line hourTick = new Line(10,CIRCLE_RADIUS,30,CIRCLE_RADIUS);
             hourTick.setStroke(Color.BLACK);
-            hourTick.setStrokeWidth(10);
+            hourTick.setStrokeWidth(8);
             Rotate rotate = new Rotate();
             rotate.setAngle((360F / 12F) * i);
             rotate.setPivotX(CIRCLE_RADIUS);
@@ -133,7 +133,7 @@ public class ClockPane {
         for (int i = 0; i < 60; i++) {
             Line minuteTick = new Line(8,CIRCLE_RADIUS,15,CIRCLE_RADIUS);
             minuteTick.setStroke(Color.BLACK);
-            minuteTick.setStrokeWidth(5);
+            minuteTick.setStrokeWidth(4);
             Rotate rotate = new Rotate();
             rotate.setAngle((360F / 60F) * i);
             rotate.setPivotX(CIRCLE_RADIUS);
@@ -142,12 +142,17 @@ public class ClockPane {
             pane.getChildren().add(minuteTick);
         }
 
-        Circle pin = new Circle(8);
-        pin.setFill(Color.BLACK);
-        pin.setLayoutX(CIRCLE_RADIUS);
-        pin.setLayoutY(CIRCLE_RADIUS);
+        Circle hourMinutePin = new Circle(9);
+        hourMinutePin.setFill(Color.BLACK);
+        hourMinutePin.setLayoutX(CIRCLE_RADIUS);
+        hourMinutePin.setLayoutY(CIRCLE_RADIUS);
 
-        pane.getChildren().addAll(pmamLabel, createHourHand(), createMinuteHand(), pin, createSecondHand());
+        Circle secondPin = new Circle(3);
+        secondPin.setFill(Color.RED);
+        secondPin.setLayoutX(CIRCLE_RADIUS);
+        secondPin.setLayoutY(CIRCLE_RADIUS);
+
+        pane.getChildren().addAll(pmamLabel, createHourHand(), createMinuteHand(), hourMinutePin, createSecondHand(), secondPin);
 
         return pane;
     }
