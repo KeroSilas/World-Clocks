@@ -2,9 +2,9 @@ package com.kerosilas.analogclock.model;
 
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -36,21 +36,25 @@ public class ClockPane {
         vBox = new VBox();
         vBox.setPrefSize(390,390);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(8);
-
+        vBox.setSpacing(16);
 
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         secondRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
 
         MFXCheckbox checkBox = new MFXCheckbox();
-
         pmamLabel = new Label();
+
+        checkBox.setTranslateX(8);
+        pmamLabel.setTranslateX(274);
+
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(checkBox, pmamLabel);
 
         Label tzLabel = new Label();
         tzLabel.setText(tz.getID());
 
-        vBox.getChildren().addAll(checkBox, pmamLabel, createClockFace(), tzLabel);
+        vBox.getChildren().addAll(hBox, createClockFace(), tzLabel);
     }
 
     public VBox getVBox() {

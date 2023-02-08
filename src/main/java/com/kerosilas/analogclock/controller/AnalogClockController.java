@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -55,7 +56,8 @@ public class AnalogClockController {
         List<VBox> toDelete = new ArrayList<>();
         for (int i = 0; i < flowPane.getChildren().size(); i++) {
             VBox vBox = (VBox) flowPane.getChildren().get(i);
-            MFXCheckbox checkBox = (MFXCheckbox) vBox.getChildren().get(0);
+            HBox hBox = (HBox) vBox.getChildren().get(0);
+            MFXCheckbox checkBox = (MFXCheckbox) hBox.getChildren().get(0);
 
             if (checkBox.isSelected())
                 toDelete.add(vBox);
