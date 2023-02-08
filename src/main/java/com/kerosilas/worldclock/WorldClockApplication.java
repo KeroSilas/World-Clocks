@@ -18,7 +18,7 @@ public class WorldClockApplication extends Application {
         stage.setMinWidth(422);
         stage.setMinHeight(530);
         stage.setWidth(812);
-        stage.setHeight(920);
+        stage.setHeight(918);
         stage.setScene(scene);
         stage.show();
     }

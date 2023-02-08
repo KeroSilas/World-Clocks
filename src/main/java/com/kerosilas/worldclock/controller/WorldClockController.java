@@ -62,7 +62,6 @@ public class WorldClockController {
             tzList.add(TimeZone.getTimeZone(s).getID());
         }
         comboBox.setItems(tzList);
-        comboBox.getMFXContextMenu().setHeight(1000);
 
         ClockPane clockPane1 = new ClockPane(TimeZone.getTimeZone("Europe/Copenhagen"));
         ClockPane clockPane2 = new ClockPane(TimeZone.getTimeZone("Asia/Tokyo"));

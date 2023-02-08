@@ -57,7 +57,7 @@ public class ClockPane {
 
         Label tzLabel = new Label();
         tzLabel.setFont(Font.font("Roboto", FontWeight.NORMAL, FontPosture.REGULAR, 14));
-        tzLabel.setText(tz.getID());
+        tzLabel.setText(tz.getDisplayName());
 
         vBox = new VBox();
         vBox.setPrefSize(390,390);
