@@ -2,7 +2,6 @@ package com.kerosilas.analogclock.model;
 
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
