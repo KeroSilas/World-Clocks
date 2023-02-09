@@ -23,7 +23,7 @@
                   <Font name="Roboto" size="12.0" />
                </font>
             </MFXFilterComboBox>
-            <MFXButton fx:id="addButton" buttonType="RAISED" depthLevel="LEVEL1" disable="true" focusTraversable="false" onAction="#handleAdd" prefHeight="31.0" prefWidth="75.0" text="Add">
+            <MFXButton fx:id="addButton" buttonType="RAISED" depthLevel="LEVEL1" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleAdd" prefHeight="31.0" prefWidth="75.0" text="Add">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -36,7 +36,7 @@
                   <Insets left="10.0" right="8.0" />
                </HBox.margin>
             </Separator>
-            <MFXButton fx:id="removeButton" buttonType="RAISED" depthLevel="LEVEL1" focusTraversable="false" onAction="#handleRemove" prefHeight="31.0" prefWidth="75.0" text="Remove">
+            <MFXButton fx:id="removeButton" buttonType="RAISED" depthLevel="LEVEL1" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleRemove" prefHeight="31.0" prefWidth="75.0" text="Remove">
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
@@ -55,12 +55,23 @@
       </MFXScrollPane>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" prefHeight="32.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </BorderPane.margin>
          <children>
-            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <MFXButton fx:id="resetButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="31.0" prefWidth="75.0" text="Reset" />
+               </children></HBox>
+            <Label fx:id="currentTimezone" prefHeight="31.0" text="N/A">
+               <font>
+                  <Font name="Roboto" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
             <Separator focusTraversable="false" orientation="VERTICAL">
                <HBox.margin>
                   <Insets left="10.0" right="8.0" />

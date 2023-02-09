@@ -29,7 +29,7 @@ public class WorldClockController {
     @FXML private MFXButton addButton;
     @FXML private MFXFilterComboBox<String> comboBox;
     @FXML private FlowPane flowPane;
-    @FXML private Label currentTime;
+    @FXML private Label currentTime, currentTimezone;
 
     @FXML void handleAdd() {
         ClockPane clockPane = new ClockPane(TimeZone.getTimeZone(comboBox.getSelectedItem()));
@@ -56,19 +56,38 @@ public class WorldClockController {
         flowPane.getChildren().removeAll(toDelete);
     }
 
+    @FXML void handleReset() {
+        flowPane.getChildren().clear();
+        defaultClocks();
+    }
+
     public void initialize() {
+        //Setup combobox with all available timezones
         String[] id = TimeZone.getAvailableIDs();
         for (String s : id) {
             tzList.add(TimeZone.getTimeZone(s).getID());
         }
         comboBox.setItems(tzList);
 
+        //Enable add button once a selection has been made in combobox
+        comboBox.getSelectionModel().selectedItemProperty().addListener((ov, oldValue, newValue) -> {
+            if (!Objects.equals(oldValue, newValue) && comboBox.getSelectedItem() != null) {
+                addButton.setDisable(false);
+            }
+        });
+
+        //Load a default arrangement of timezone clocks: CEST, JST, EST, PST
+        defaultClocks();
+    }
+
+    private void defaultClocks() {
         ClockPane clockPane1 = new ClockPane(TimeZone.getTimeZone("Europe/Copenhagen"));
         ClockPane clockPane2 = new ClockPane(TimeZone.getTimeZone("Asia/Tokyo"));
         ClockPane clockPane3 = new ClockPane(TimeZone.getTimeZone("US/Eastern"));
         ClockPane clockPane4 = new ClockPane(TimeZone.getTimeZone("US/Pacific"));
         flowPane.getChildren().addAll(clockPane1.getVBox(), clockPane2.getVBox(), clockPane3.getVBox(), clockPane4.getVBox());
 
+        currentTimezone.setText(TimeZone.getDefault().getDisplayName());
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, e -> {
                     clockPane1.updateHands();
@@ -81,11 +100,5 @@ public class WorldClockController {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
-        comboBox.getSelectionModel().selectedItemProperty().addListener((ov, oldValue, newValue) -> {
-            if (!Objects.equals(oldValue, newValue) && comboBox.getSelectedItem() != null) {
-                addButton.setDisable(false);
-            }
-        });
     }
 }

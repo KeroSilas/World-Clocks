@@ -33,13 +33,16 @@ public class ClockPane {
     public ClockPane(TimeZone tz) {
         this.tz = tz;
 
+        //Setup pane that will hold clock face and hands
         pane = new Pane();
         pane.setMaxSize(CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
 
+        //Setup rotate objects that will rotate hands
         hourRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         minuteRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
         secondRotate = new Rotate(0,CIRCLE_RADIUS,CIRCLE_RADIUS);
 
+        //Setup label that will say PM or AM inside of clock face
         pmamLabel = new Label();
         pmamLabel.setFont(Font.font("Roboto", FontWeight.BOLD, FontPosture.REGULAR, 14));
         pmamLabel.setLayoutX(CIRCLE_RADIUS-11);
@@ -70,6 +73,8 @@ public class ClockPane {
         return vBox;
     }
 
+    //Keeps the time and corresponding hands updated
+    //Gets run every second from a Timeline timer started in WorldClockController
     public void updateHands() {
         LocalTime time = LocalTime.now(tz.toZoneId());
 
