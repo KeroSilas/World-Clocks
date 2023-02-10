@@ -1,8 +1,11 @@
 package com.kerosilas.worldclock.model;
 
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
+import javafx.animation.ScaleTransition;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -67,6 +71,8 @@ public class ClockPane {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(16);
         vBox.getChildren().addAll(hBox, createClockFace(), tzLabel);
+
+        addClickEvent();
     }
 
     public VBox getVBox() {
@@ -160,5 +166,77 @@ public class ClockPane {
         pane.getChildren().addAll(pmamLabel, createHourHand(), createMinuteHand(), hourMinutePin, createSecondHand(), secondPin);
 
         return pane;
+    }
+
+    //Adds the ability to click on the VBox to select the checkbox
+    //Also adds a small animation to the VBox when hovered or clicked
+    private void addClickEvent() {
+        vBox.setOnMouseEntered(event -> {
+            vBox.setCursor(Cursor.HAND);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
+            scaleTransition.setByX(0.010);
+            scaleTransition.setByY(0.010);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setAutoReverse(false);
+            scaleTransition.play();
+
+            //Forces scale to be correct when animation has finished
+            //This was done because the animation was not always finishing at the correct scale when spamming the animation
+            scaleTransition.setOnFinished(e -> {
+                vBox.setScaleX(1+0.010);
+                vBox.setScaleY(1+0.010);
+            });
+        });
+
+        vBox.setOnMouseExited(event -> {
+            vBox.setCursor(Cursor.DEFAULT);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
+            scaleTransition.setByX(-0.010);
+            scaleTransition.setByY(-0.010);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setAutoReverse(false);
+            scaleTransition.play();
+
+            scaleTransition.setOnFinished(e -> {
+                vBox.setScaleX(1);
+                vBox.setScaleY(1);
+            });
+        });
+
+        vBox.setOnMousePressed(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
+                scaleTransition.setByX(-0.020);
+                scaleTransition.setByY(-0.020);
+                scaleTransition.setCycleCount(1);
+                scaleTransition.setAutoReverse(false);
+                scaleTransition.play();
+
+                scaleTransition.setOnFinished(e -> {
+                    vBox.setScaleX(1-0.010);
+                    vBox.setScaleY(1-0.010);
+                });
+            }
+        });
+
+        vBox.setOnMouseReleased(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
+                scaleTransition.setByX(0.020);
+                scaleTransition.setByY(0.020);
+                scaleTransition.setCycleCount(1);
+                scaleTransition.setAutoReverse(false);
+                scaleTransition.play();
+
+                scaleTransition.setOnFinished(e -> {
+                    vBox.setScaleX(1+0.010);
+                    vBox.setScaleY(1+0.010);
+                });
+
+                HBox hBox = (HBox) vBox.getChildren().get(0);
+                MFXCheckbox checkBox = (MFXCheckbox) hBox.getChildren().get(0);
+                checkBox.setSelected(!checkBox.isSelected());
+            }
+        });
     }
 }

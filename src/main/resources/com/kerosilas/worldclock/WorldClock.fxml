@@ -4,6 +4,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
@@ -22,6 +23,9 @@
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MFXFilterComboBox>
             <MFXButton fx:id="addButton" buttonType="RAISED" depthLevel="LEVEL1" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleAdd" prefHeight="31.0" prefWidth="75.0" text="Add">
                <HBox.margin>
@@ -30,6 +34,9 @@
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MFXButton>
             <Separator focusTraversable="false" orientation="VERTICAL">
                <HBox.margin>
@@ -40,6 +47,9 @@
                <font>
                   <Font name="Roboto" size="12.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MFXButton>
          </children>
          <BorderPane.margin>
@@ -62,7 +72,10 @@
          <children>
             <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
-                  <MFXButton fx:id="resetButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="31.0" prefWidth="75.0" text="Reset" />
+                  <MFXButton fx:id="resetButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleReset" prefHeight="31.0" prefWidth="75.0" text="Reset">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></MFXButton>
                </children></HBox>
             <Label fx:id="currentTimezone" prefHeight="31.0" text="N/A">
                <font>

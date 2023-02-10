@@ -4,8 +4,7 @@ import com.kerosilas.worldclock.model.ClockPane;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,10 +16,7 @@ import javafx.util.Duration;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.TimeZone;
+import java.util.*;
 
 public class WorldClockController {
 
@@ -37,10 +33,24 @@ public class WorldClockController {
 
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, e -> clockPane.updateHands()),
-                new KeyFrame(Duration.seconds(1))
+                new KeyFrame(Duration.seconds(0.5))
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
+        //Animations for adding clock
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(150), clockPane.getVBox());
+        clockPane.getVBox().setTranslateY(-10);
+        translateTransition.setByY(10);
+        translateTransition.setCycleCount(1);
+        translateTransition.setAutoReverse(false);
+        translateTransition.play();
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), clockPane.getVBox());
+        fadeTransition.setFromValue(0.0);
+        fadeTransition.setToValue(1.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(false);
+        fadeTransition.play();
     }
 
     @FXML void handleRemove() {
@@ -53,20 +63,58 @@ public class WorldClockController {
             if (checkBox.isSelected())
                 toDelete.add(vBox);
         }
-        flowPane.getChildren().removeAll(toDelete);
+
+        //Animations for removing clocks
+        for (VBox vBox : toDelete) {
+            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(150), vBox);
+            translateTransition.setByY(-10);
+            translateTransition.setCycleCount(1);
+            translateTransition.setAutoReverse(false);
+            translateTransition.play();
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), vBox);
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.setCycleCount(1);
+            fadeTransition.setAutoReverse(false);
+            fadeTransition.play();
+
+            //Removes clocks from flowpane after animation is finished
+            fadeTransition.setOnFinished(e -> flowPane.getChildren().remove(vBox));
+        }
     }
 
     @FXML void handleReset() {
-        flowPane.getChildren().clear();
-        defaultClocks();
+        //Animations for resetting clocks
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), flowPane);
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(false);
+        fadeTransition.play();
+
+        //Loads default clocks after animation is finished
+        fadeTransition.setOnFinished(e -> {
+            flowPane.getChildren().clear();
+            defaultClocks();
+
+            //Animations for loading default clocks
+            FadeTransition fadeTransition2 = new FadeTransition(Duration.millis(150), flowPane);
+            fadeTransition2.setFromValue(0.0);
+            fadeTransition2.setToValue(1.0);
+            fadeTransition2.setCycleCount(1);
+            fadeTransition2.setAutoReverse(false);
+            fadeTransition2.play();
+        });
     }
 
     public void initialize() {
         //Setup combobox with all available timezones
         String[] id = TimeZone.getAvailableIDs();
         for (String s : id) {
-            tzList.add(TimeZone.getTimeZone(s).getID());
+            tzList.add(TimeZone.getTimeZone(s).getDisplayName());
         }
+        tzList.removeIf(s -> tzList.indexOf(s) != tzList.lastIndexOf(s)); //Removes duplicates
+        Collections.sort(tzList); //Sorts alphabetically
         comboBox.setItems(tzList);
 
         //Enable add button once a selection has been made in combobox
@@ -96,7 +144,7 @@ public class WorldClockController {
                     clockPane4.updateHands();
                     currentTime.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a")).toUpperCase());
                 }),
-                new KeyFrame(Duration.seconds(1))
+                new KeyFrame(Duration.seconds(0.5))
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
