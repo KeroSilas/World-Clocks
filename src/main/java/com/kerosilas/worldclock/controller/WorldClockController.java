@@ -111,10 +111,8 @@ public class WorldClockController {
         //Setup combobox with all available timezones
         String[] id = TimeZone.getAvailableIDs();
         for (String s : id) {
-            tzList.add(TimeZone.getTimeZone(s).getDisplayName());
+            tzList.add(TimeZone.getTimeZone(s).getID());
         }
-        tzList.removeIf(s -> tzList.indexOf(s) != tzList.lastIndexOf(s)); //Removes duplicates
-        Collections.sort(tzList); //Sorts alphabetically
         comboBox.setItems(tzList);
 
         //Enable add button once a selection has been made in combobox
