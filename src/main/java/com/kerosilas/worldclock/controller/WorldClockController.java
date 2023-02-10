@@ -82,27 +82,17 @@ public class WorldClockController {
     }
 
     @FXML void handleReset() {
-        //Animations for resetting clocks
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(150), flowPane);
-        fadeTransition.setFromValue(1.0);
-        fadeTransition.setToValue(0.0);
-        fadeTransition.setCycleCount(1);
-        fadeTransition.setAutoReverse(false);
-        fadeTransition.play();
-
         //Loads default clocks after animation is finished
-        fadeTransition.setOnFinished(e -> {
-            flowPane.getChildren().clear();
-            defaultClocks();
+        flowPane.getChildren().clear();
+        defaultClocks();
 
-            //Animations for loading default clocks
-            FadeTransition fadeTransition2 = new FadeTransition(Duration.millis(150), flowPane);
-            fadeTransition2.setFromValue(0.0);
-            fadeTransition2.setToValue(1.0);
-            fadeTransition2.setCycleCount(1);
-            fadeTransition2.setAutoReverse(false);
-            fadeTransition2.play();
-        });
+        //Animations for loading default clocks
+        FadeTransition fadeTransition2 = new FadeTransition(Duration.millis(150), flowPane);
+        fadeTransition2.setFromValue(0.0);
+        fadeTransition2.setToValue(1.0);
+        fadeTransition2.setCycleCount(1);
+        fadeTransition2.setAutoReverse(false);
+        fadeTransition2.play();
 
         selectAllCheckbox.setSelected(false);
     }
