@@ -73,6 +73,14 @@ public class ClockPane {
         vBox.getChildren().addAll(hBox, createClockFace(), tzLabel);
 
         addClickEvent();
+
+        checkBox.selectedProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue) {
+                vBox.setStyle("-fx-border-color: #6200ee;");
+            } else {
+                vBox.setStyle("-fx-border-color: #e3e3e3;");
+            }
+        });
     }
 
     public VBox getVBox() {
@@ -206,15 +214,15 @@ public class ClockPane {
         vBox.setOnMousePressed(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
-                scaleTransition.setByX(-0.020);
-                scaleTransition.setByY(-0.020);
+                scaleTransition.setByX(-0.010);
+                scaleTransition.setByY(-0.010);
                 scaleTransition.setCycleCount(1);
                 scaleTransition.setAutoReverse(false);
                 scaleTransition.play();
 
                 scaleTransition.setOnFinished(e -> {
-                    vBox.setScaleX(1-0.010);
-                    vBox.setScaleY(1-0.010);
+                    vBox.setScaleX(1);
+                    vBox.setScaleY(1);
                 });
             }
         });
@@ -222,8 +230,8 @@ public class ClockPane {
         vBox.setOnMouseReleased(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(75), vBox);
-                scaleTransition.setByX(0.020);
-                scaleTransition.setByY(0.020);
+                scaleTransition.setByX(0.010);
+                scaleTransition.setByY(0.010);
                 scaleTransition.setCycleCount(1);
                 scaleTransition.setAutoReverse(false);
                 scaleTransition.play();
